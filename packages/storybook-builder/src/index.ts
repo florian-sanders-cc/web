@@ -20,6 +20,10 @@ import {
   rollupPluginPrebundleModules,
 } from './rollup-plugin-prebundle-modules';
 import { rollupPluginStorybookBuilder } from './rollup-plugin-storybook-builder';
+import rollupPluginCommonjs from '@rollup/plugin-commonjs';
+import rollupPluginInjectProcessEnv from 'rollup-plugin-inject-process-env';
+import rollupPluginJson from '@rollup/plugin-json';
+import alias from '@rollup/plugin-alias';
 
 const wdsPluginExternalGlobals = fromRollup(rollupPluginExternalGlobals);
 const wdsPluginPrebundleModules = fromRollup(rollupPluginPrebundleModules);
@@ -144,7 +148,14 @@ export const build: WdsBuilder['build'] = async ({ startTime, options }) => {
         extractAssets: false,
       }),
       rollupPluginNodeResolve(),
-      rollupPluginPrebundleModules(env),
+      alias({
+        entries: [
+          { find: 'assert', replacement: 'browser-assert' },
+        ]
+      }),
+      rollupPluginJson(),
+      rollupPluginCommonjs(),
+      rollupPluginInjectProcessEnv(env),
       rollupPluginStorybookBuilder(options),
       rollupPluginExternalGlobals(globals),
     ],
