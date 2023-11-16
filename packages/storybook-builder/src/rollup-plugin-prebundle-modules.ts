@@ -85,4 +85,37 @@ export const CANDIDATES = [
 
   // ESM, but uses `process.env.NODE_ENV`
   'tiny-invariant',
+  /**
+     * dependency of '@storybook/react-dom-shim' (https://cdn.jsdelivr.net/npm/@storybook/react-dom-shim@7.5.1/dist/react-16.mjs)
+     * exports rely on commonjs: https://cdn.jsdelivr.net/npm/react-dom@18.2.0/index.js
+     */ 
+  'react-dom',
+  /**
+   * dependency of '@storybook/theming' (https://cdn.jsdelivr.net/npm/@storybook/theming@7.5.1/dist/index.mjs) 
+   * `import * as React from 'react';
+   * import { forwardRef, useContext } from 'react';`
+   * exports rely on commonjs: https://cdn.jsdelivr.net/npm/react@18.2.0/index.js
+   */
+  'react',
+  /**
+   * dependency of '@storybook/theming' (https://cdn.jsdelivr.net/npm/@storybook/theming@7.5.1/dist/index.mjs)
+   * `import memoize2 from 'memoizerific';`
+   * exports rely on commonjs: https://cdn.jsdelivr.net/npm/memoizerific@1.11.3/src/memoizerific.js
+   */
+  'memoizerific',
+  /**
+   * dependencies of '@storybook/blocks' (https://cdn.jsdelivr.net/npm/@storybook/blocks@7.5.1/dist/index.mjs)
+   * they all rely on commonjs (https://cdn.jsdelivr.net/npm/lodash@4.17.21/uniq.js for instance)
+   */
+  'lodash/uniq.js',
+  'lodash/pickBy.js',
+  'lodash/cloneDeep.js',
+  'lodash/throttle.js',
+  /**
+   * dependency of '@storybook/dist/Color-[hash].msj' (https://cdn.jsdelivr.net/npm/@storybook/blocks@7.5.1/dist/Color-6VNJS4EI.mjs)
+   * exports rely on commonjs: https://cdn.jsdelivr.net/npm/color-convert@2.0.1/index.js 
+   */
+  'color-convert',
+  'tocbot',
+  '@storybook/blocks',
 ];
